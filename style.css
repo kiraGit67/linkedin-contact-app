@@ -1,0 +1,61 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  padding: 3rem 2.5rem;
+}
+
+ul.contact-list {
+  list-style-type: none;
+  margin-left: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+ul.contact-list > li {
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.5rem;
+  padding-block: 1rem;
+  background-size: 100vw 10vh;
+  background-position: top 0vw;
+  background-repeat: no-repeat;
+}
+
+ul.contact-list > li > img.contact-list__img {
+  aspect-ratio: 1;
+  max-width: 100%;
+  border-radius: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  ul.contact-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  ul.contact-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  ul.contact-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
