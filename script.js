@@ -57,6 +57,19 @@ function generateContactCard(contactData) {
   closeBtn.className = "contact-list__btn-close";
   closeBtn.innerText = "X";
 
+  closeBtn.addEventListener("click", async () => {
+    //Neue Person von der API laden
+    const response = await fetch(
+      "https://dummy-apis.netlify.app/api/contact-suggestions?count=1"
+    );
+    const jsonData = await response.json();
+    const newPerson = jsonData[0];
+    console.log(newPerson);
+    //State aktualisieren
+    //Angeklickten Kontakt entfernen
+    //Neu generierten Kontakt dafür einsetzen
+  });
+
   li.append(contactImg, h2name, h5jobTitle, pConnections, connectBtn, closeBtn);
 
   return li;
