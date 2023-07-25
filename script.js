@@ -17,7 +17,7 @@ async function getContactsFromApi() {
   console.log(jsonData);
 }
 
-function generateContactCard(contactData) {
+function generateContactCard(contactData, cardIndex) {
   const li = document.createElement("li");
   li.style.backgroundImage = "url(" + contactData.backgroundImage + ")";
 
@@ -65,6 +65,8 @@ function generateContactCard(contactData) {
     const jsonData = await response.json();
     const newPerson = jsonData[0];
     console.log(newPerson);
+    console.log("Clicked Card Item: " + cardIndex);
+    console.log(state.contacts[cardIndex]);
     //State aktualisieren
     //Angeklickten Kontakt entfernen
     //Neu generierten Kontakt dafür einsetzen
@@ -78,10 +80,9 @@ function generateContactCard(contactData) {
 function render() {
   const contactList = document.querySelector(".contact-list");
 
-  for (let contactData of state.contacts) {
-    console.log(generateContactCard(contactData));
-    contactList.appendChild(generateContactCard(contactData));
-  }
+  state.contacts.forEach((contactData, index) => {
+    contactList.appendChild(generateContactCard(contactData, index));
+  });
 }
 
 getContactsFromApi();
