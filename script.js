@@ -5,6 +5,27 @@ const state = {
   contacts: [],
 };
 
+//Hilfsfunktion, um eine Id pro contactData zu generieren
+function guidGenerator() {
+  var S4 = function () {
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+  };
+  return (
+    S4() +
+    S4() +
+    "-" +
+    S4() +
+    "-" +
+    S4() +
+    "-" +
+    S4() +
+    "-" +
+    S4() +
+    S4() +
+    S4()
+  );
+}
+
 async function getContactsFromApi() {
   //https://dummy-apis.netlify.app/api/contact-suggestions?count=8
   //Daten laden
@@ -12,13 +33,19 @@ async function getContactsFromApi() {
     "https://dummy-apis.netlify.app/api/contact-suggestions?count=8"
   );
   const jsonData = await response.json();
-  state.contacts = jsonData;
+  state.contacts = jsonData.map((contactData) => {
+    return {
+      ...contactData,
+      id: guidGenerator(),
+    };
+  });
   render();
-  console.log(jsonData);
+  console.log(state.contacts);
 }
 
-function generateContactCard(contactData, cardIndex) {
+function generateContactCard(contactData) {
   const li = document.createElement("li");
+  li.className = "contact-list__person";
   li.style.backgroundImage = "url(" + contactData.backgroundImage + ")";
 
   const contactImg = document.createElement("img");
@@ -65,9 +92,16 @@ function generateContactCard(contactData, cardIndex) {
     const jsonData = await response.json();
     const newPerson = jsonData[0];
     console.log(newPerson);
-    console.log("Clicked Card Item: " + cardIndex);
-    console.log(state.contacts[cardIndex]);
+
     //State aktualisieren
+    state.contacts = state.contacts.filter((contactEntryFromState) => {
+      return contactEntryFromState.id !== contactData.id;
+    });
+
+    render();
+
+    console.log(state.contacts);
+
     //Angeklickten Kontakt entfernen
     //Neu generierten Kontakt dafür einsetzen
   });
@@ -79,6 +113,7 @@ function generateContactCard(contactData, cardIndex) {
 
 function render() {
   const contactList = document.querySelector(".contact-list");
+  contactList.innerHTML = "";
 
   state.contacts.forEach((contactData, index) => {
     contactList.appendChild(generateContactCard(contactData, index));
@@ -88,7 +123,7 @@ function render() {
 getContactsFromApi();
 
 /*
-<li>
+<li class="contact-list__person">
     <img src="https://randomuser.me/api/portraits/men/27.jpg" alt="" class="contact-list__img">
     <h2 class="contact-list__name">Mr. Jeremy Pearson</h2>
     <h5 class="contact-list__job-title">Fullstack Developer</h5>
