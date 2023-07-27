@@ -40,7 +40,7 @@ async function getContactsFromApi() {
     };
   });
   render();
-  console.log(state.contacts);
+  console.table(state.contacts);
 }
 
 function generateContactCard(contactData) {
@@ -93,17 +93,19 @@ function generateContactCard(contactData) {
     const newPerson = jsonData[0];
     console.log(newPerson);
 
-    //State aktualisieren
+    //Angeklickten Kontakt entfernen
     state.contacts = state.contacts.filter((contactEntryFromState) => {
       return contactEntryFromState.id !== contactData.id;
     });
 
+    //State aktualisieren
     render();
+    console.table(state.contacts);
 
-    console.log(state.contacts);
-
-    //Angeklickten Kontakt entfernen
     //Neu generierten Kontakt dafür einsetzen
+    state.contacts.push(newPerson);
+    render();
+    console.table(state.contacts);
   });
 
   li.append(contactImg, h2name, h5jobTitle, pConnections, connectBtn, closeBtn);
