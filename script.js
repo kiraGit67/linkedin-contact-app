@@ -78,8 +78,20 @@ function generateContactCard(contactData) {
 
   const pConnections = document.createElement("p");
   pConnections.className = "contact-list__connections";
-  pConnections.innerText =
-    "Mutual Connections: " + contactData.mutualConnections;
+
+  if (contactData.title.includes("GfK")) {
+    pConnections.innerText = "GfK";
+  } else {
+    if (contactData.mutualConnections === 1) {
+      pConnections.innerText =
+        contactData.mutualConnections + " Mutual Connection";
+    } else if (contactData.mutualConnections === 0) {
+      pConnections.innerText = "No Mutual Connections";
+    } else {
+      pConnections.innerText =
+        contactData.mutualConnections + " Mutual Connections";
+    }
+  }
 
   const connectBtn = document.createElement("button");
   connectBtn.className = "contact-list__btn-connect";
