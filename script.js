@@ -46,7 +46,12 @@ async function getContactsFromApi() {
 function generateContactCard(contactData) {
   const li = document.createElement("li");
   li.className = "contact-list__person";
-  li.style.backgroundImage = "url(" + contactData.backgroundImage + ")";
+  //li.style.backgroundImage = "url(" + contactData.backgroundImage + ")";
+
+  const imgContainer = document.createElement("div");
+  imgContainer.className = "contact-list__img-container";
+  imgContainer.style.backgroundImage =
+    "url(" + contactData.backgroundImage + ")";
 
   const contactImg = document.createElement("img");
   contactImg.className = "contact-list__img";
@@ -108,7 +113,15 @@ function generateContactCard(contactData) {
     console.table(state.contacts);
   });
 
-  li.append(contactImg, h2name, h5jobTitle, pConnections, connectBtn, closeBtn);
+  li.append(
+    imgContainer,
+    contactImg,
+    h2name,
+    h5jobTitle,
+    pConnections,
+    connectBtn,
+    closeBtn
+  );
 
   return li;
 }
