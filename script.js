@@ -79,8 +79,12 @@ function generateContactCard(contactData) {
   const pConnections = document.createElement("p");
   pConnections.className = "contact-list__connections";
 
-  if (contactData.title.includes("GfK")) {
+  if (
+    contactData.title.split(" ").includes("GfK") ||
+    h5jobTitle.innerText.split(" ").includes("GfK")
+  ) {
     pConnections.innerText = "GfK";
+    pConnections.classList.add("gfk");
   } else {
     if (contactData.mutualConnections === 1) {
       pConnections.innerText =
