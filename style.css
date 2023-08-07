@@ -53,6 +53,23 @@ ul.contact-list > li > img.contact-list__img {
   border-radius: 100%;
 }
 
+.contact-list__connections::before {
+  content: "@ ";
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: dodgerblue;
+}
+
+.contact-list__connections.gfk::before {
+  content: "GfK";
+  font-size: 1.1rem;
+  color: white;
+  background-color: #ff6600;
+  aspect-ratio: 1;
+  padding: 5px 3px;
+  text-align: center;
+}
+
 .contact-list__btn-connect {
   display: block;
   width: 100%;
