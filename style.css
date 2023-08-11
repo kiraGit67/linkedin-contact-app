@@ -5,7 +5,7 @@
 }
 
 html {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif,
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
@@ -20,10 +20,10 @@ header {
   padding: 1.5rem 1.25rem;
   border: 1px solid lightgrey;
   border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.75);
 }
 
 header {
-  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,7 +35,7 @@ header > p {
 }
 
 header + main {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 ul.contact-list {
@@ -45,7 +45,6 @@ ul.contact-list {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
-  z-index: -1;
 }
 
 ul.contact-list > li {
@@ -55,7 +54,6 @@ ul.contact-list > li {
   padding-block: 1rem;
   padding-inline: 1.5rem;
   position: relative;
-  z-index: -1;
   background-color: white;
 }
 
@@ -65,18 +63,36 @@ ul.contact-list > li {
   background-repeat: no-repeat;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 25%;
-  z-index: -1;
+  height: 100px;
+  margin-block: -1rem 3.5rem;
+  margin-inline: -1.5rem;
+  padding-block: 1rem;
 }
 
-ul.contact-list > li > img.contact-list__img {
+ul.contact-list > li > .contact-list__img-container > img.contact-list__img {
   aspect-ratio: 1;
   max-width: 100%;
   border-radius: 100%;
+}
+
+.contact-list__name {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.contact-list__job-title {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.contact-list__name + .contact-list__job-title {
+  margin-top: 0.25rem;
+}
+
+.contact-list__connections {
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .contact-list__connections::before {
