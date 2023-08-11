@@ -3,7 +3,19 @@
 //State festlegen
 const state = {
   contacts: [],
+  pendingInvitations: 0,
 };
+
+const pendingInvitationContainer = document.querySelector(
+  ".pending-invitations"
+);
+
+if (state.pendingInvitations === 0) {
+  pendingInvitationContainer.innerText = "No pending invitations";
+} else {
+  pendingInvitationContainer.innerText =
+    state.pendingInvitations + " pending invitations";
+}
 
 //Hilfsfunktion, um eine Id pro contactData zu generieren
 function guidGenerator() {
