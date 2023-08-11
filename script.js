@@ -14,7 +14,7 @@ if (state.pendingInvitations === 0) {
   pendingInvitationContainer.innerText = "No pending invitations";
 } else {
   pendingInvitationContainer.innerText =
-    state.pendingInvitations + " pending invitations";
+    state.pendingInvitations.toString() + " pending invitations";
 }
 
 //Hilfsfunktion, um eine Id pro contactData zu generieren
@@ -75,6 +75,8 @@ function generateContactCard(contactData) {
     ", " +
     contactData.title;
 
+  imgContainer.appendChild(contactImg);
+
   const h2name = document.createElement("h2");
   h2name.className = "contact-list__name";
   h2name.innerText =
@@ -113,6 +115,28 @@ function generateContactCard(contactData) {
   connectBtn.className = "contact-list__btn-connect";
   connectBtn.innerText = "Connect";
 
+  connectBtn.addEventListener("click", () => {
+    /**/
+    if (connectBtn.innerText === "Connect") {
+      state.pendingInvitations++;
+      connectBtn.innerText = "Pending";
+    } else {
+      if (state.pendingInvitations > 0) {
+        state.pendingInvitations--;
+      } else {
+        state.pendingInvitations = 0;
+      }
+      connectBtn.innerText = "Connect";
+    }
+    console.log(state.pendingInvitations);
+    if (state.pendingInvitations === 0) {
+      pendingInvitationContainer.innerText = "No pending invitations";
+    } else {
+      pendingInvitationContainer.innerText =
+        state.pendingInvitations.toString() + " pending invitations";
+    }
+  });
+
   const closeBtn = document.createElement("button");
   closeBtn.className = "contact-list__btn-close";
   closeBtn.innerText = "X";
@@ -143,7 +167,6 @@ function generateContactCard(contactData) {
 
   li.append(
     imgContainer,
-    contactImg,
     h2name,
     h5jobTitle,
     pConnections,
